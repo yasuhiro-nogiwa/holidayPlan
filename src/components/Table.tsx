@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-// import './index.css'
 
-const MoneyBook = () => {
+const Table = () => {
   return (
     <div>
       <table className="book">
@@ -20,4 +19,4 @@ const MoneyBook = () => {
   );
 };
 
-export default MoneyBook;
+export default Table;
