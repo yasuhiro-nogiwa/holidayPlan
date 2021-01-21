@@ -3,11 +3,14 @@ import React from 'react';
 import Table from './components/Table';
 import Chart from './components/Chart';
 import PieChart from './components/PieChart';
+import TextBox from './components/TextBox';
 
 //cssを利用するのであればimport
 import './App.css'
 
 function App() {
+
+
   return (   
     <div className="App">
       {/* ボタン用に50px開けておく */}
@@ -31,7 +34,7 @@ function App() {
         <label className="label">振り返り</label>
       </div>
       <div className="text" style={{ marginTop: '10px', marginLeft: 30 }}>
-        <textarea style={{ width: 800, height: 50 }}></textarea>
+        <TextBox />
       </div>
     </div>
   );
