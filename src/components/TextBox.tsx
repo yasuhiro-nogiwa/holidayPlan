@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+import './SetApi';
+import SetApi from './SetApi';
+
 const TextBox = () => {
 
     const [textVal, setTextVal] = useState('');
@@ -8,6 +11,9 @@ const TextBox = () => {
         e.preventDefault();
         setTextVal(e.target.value);
         console.log(textVal);
+
+        //水上さん、この部分のコメントアウトを取ってください。
+        // SetApi("comment","dummy",textVal);
     }
 
     return (
