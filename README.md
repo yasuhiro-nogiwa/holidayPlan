@@ -1,10 +1,11 @@
 
-# cloneについて
+# cloneについてから実行について
 以下手順にてプロジェクトをcloneし、実行してください。
 ```
  cd "カレントフォルダ"
  git clone https://github.com/yasuhiro-nogiwa/holidayPlan.git
  npm install
+ npm install --save react-chartjs-2 chart.js
  npm start
 ```
 

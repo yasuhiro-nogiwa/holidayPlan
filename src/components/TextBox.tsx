@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import './SetApi';
-import SetApi from './SetApi';
+//水上さん、この部分のコメントアウトを取ってください。
+// import './SetApi';
 
 const TextBox = () => {
 
