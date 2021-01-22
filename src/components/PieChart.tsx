@@ -1,18 +1,16 @@
 import { Pie } from 'react-chartjs-2';
 
-// import GetApi from './GetApi';
+import GetApi from './GetApi';
 
 const PieChart = () => {
 
     //計画総数
     let planNumber = function() {
-        // return GetApi("totalplan", "dummy");
-        return 100;
+        return GetApi("totalplan", "dummy");
     };
     //突発総数
     let suddenNumber = function() {
-        // return GetApi("totalsudden", "dummy");
-        return 10;
+        return GetApi("totalsudden", "dummy");
     };
 
     const data = {

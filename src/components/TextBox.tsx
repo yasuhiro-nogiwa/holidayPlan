@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 
-//水上さん、この部分のコメントアウトを取ってください。
-// import './SetApi';
+import SetApi from './SetApi';
+import GetApi from './GetApi';
 
 const TextBox = () => {
 
-    const [textVal, setTextVal] = useState('');
+    let comment = GetApi("comment", "dummy");
+
+    const [textVal, setTextVal] = useState(comment);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        //全体再描画の抑制
         e.preventDefault();
+        //値の確保
         setTextVal(e.target.value);
-        console.log(e.target.value);
 
-        //水上さん、この部分のコメントアウトを取ってください。
-        // SetApi("comment","dummy",textVal);
+        //コメント編集の値をセット(随時更新)
+        SetApi("comment","dummy",e.target.value);
     }
 
     return (

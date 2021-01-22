@@ -17,3 +17,19 @@
 ・semantic-ui "index.htmlにURL記載済み"
 ・cssの導入 
 ```
+
+# ビルド及びローカル環境における確認実行手順
+```
+//ビルド
+npm run build
+// プロジェクト内のbuildフォルダにビルド物を作成
+
+//serverのインストール(必要があれば)
+npm npm install serve -g
+
+//ローカルサーバの立ち上げ
+serve -s ./build
+
+//サーバー起動時のlocalhostにアクセス
+//"http://localhost:5000" <- デフォルト
+```

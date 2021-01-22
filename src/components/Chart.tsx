@@ -1,11 +1,8 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
-// import { JsonFileManager } from './JsonFileManager';
-// import GetApi from './GetApi';
+import GetApi from './GetApi';
 
 const Chart = () => {
-
-  // let f = JsonFileManager.getInstance();
 
   const monthArray = [
     "aplil",
@@ -28,33 +25,25 @@ const Chart = () => {
     ['12月'], ['1月'], ['2月'], ['3月'],
   ]
 
-  // function getGraphData( typeKey: string) {
-  //   var retData: Array<number> = new Array(12);
-  //   for (const key in monthArray) {
-  //     retData.push = GetApi(typeKey, key);
-  //   }
-  //   return retData;
-  // }
+  function getGraphData( typeKey: string) {
+    var retData: Array<number> = new Array(12);
+    for (const key in monthArray) {
+      retData.push = GetApi(typeKey, key);
+    }
+    return retData;
+  }
 
   //予定線データ
   let planDataF = function () {
-    // var retData: Array<number> = new Array(12);
-    // for (const key in monthArray) {
-    //   retData.push = f.GetHolidayData("getmonthlyschedule", key);
-    // }
-    // return retData;
-    // return getGraphData("getmonthlyschedule");
-    return [24, 22, 21, 20, 19.5, 18.5, 16.5, 15.5, 9.5, 7.5, 6.5, 5.5];
+    return getGraphData("getmonthlyschedule");
   }
   //実行線データ
   let executionDataF = function () {
-    // return getGraphData("getmonthlyexecute");
-    return [23.5, 23.5, 20.5, 20.5, 19.5, 17.5, 16.5, 14.5, 14.5, 8, 7, 6];
+    return getGraphData("getmonthlyexecute");
   }
   //総数棒グラフデータ
   let totalBarDataF = function () {
-    // return getGraphData("monthlyholiday");
-    return [1.5, 1.5, 4.5, 4.5, 5.5, 7.5, 8.5, 10.5, 10.5, 17, 18, 19];
+    return getGraphData("monthlyholiday");
   }
 
   /** グラフデータ */
