@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Settings from './components/Settings';
 import Table from './components/Table';
 import Chart from './components/Chart';
 import PieChart from './components/PieChart';
@@ -16,6 +17,7 @@ function App() {
       {/* ボタン用に50px開けておく */}
       {/* <div style={{marginTop:'50px'}}>App Test</div> */}
       <div style={{ marginTop: '50px', marginLeft: 30, }}>
+        <Settings />
         <Table />
       </div>
       {/* <div style={{ marginTop: '10px', marginLeft: 30 }}>
