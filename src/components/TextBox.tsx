@@ -10,7 +10,7 @@ const TextBox = () => {
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         e.preventDefault();
         setTextVal(e.target.value);
-        console.log(textVal);
+        console.log(e.target.value);
 
         //水上さん、この部分のコメントアウトを取ってください。
         // SetApi("comment","dummy",textVal);
