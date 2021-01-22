@@ -56,18 +56,35 @@ export class JsonFileManager
     // JSON個人情報ファイル読み込み
     private loadPersonalFile(filePath: string): void
     {
+        // Reactではfsは使用できないのでコメントアウト
+        /*
         // ファイル読み込み
         const fs = require('fs');
         const jsonObject = JSON.parse(fs.readFileSync(filePath, 'utf8'));
         const tempData = jsonObject.PersonalData;
-
+       
         this.Name = tempData.Name;  // 名称
         this.TotalHoriday = tempData.TotalHoriday;  // 年休総数
+        */
+
+        // localStorageからデータを取得
+        let temp = localStorage.getItem("Name");
+        if(temp != null)
+        {
+            this.Name = JSON.parse(temp);   // 名称
+        }
+        temp = localStorage.getItem("TotalHoriday");
+        if(temp != null)
+        {
+            this.TotalHoriday = JSON.parse(temp);   // 年休総数
+        }
     }
 
     // JSON個人情報ファイル書き込み
     private savePersonalFile(filePath: string): void
     {
+        // Reactではfsは使用できないのでコメントアウト
+        /*
         const fs = require('fs');
         let saveData = {
             Name: this.Name,  // 名称
@@ -77,11 +94,18 @@ export class JsonFileManager
         // ファイル書き込み
         let jsonObject = JSON.stringify({PersonalData: saveData}, null, ' ')
         fs.writeFileSync(filePath, jsonObject);
+        */
+
+        // localStorageにデータを保存
+        localStorage.setItem("Name", JSON.stringify(this.Name));    // 名称
+        localStorage.setItem("TotalHoriday", JSON.stringify(this.TotalHoriday)); // 年休総数
     }
 
     // JSON有給休暇ファイル読み込み
     private loadHolidayFile(filePath: string): void
     {
+        // Reactではfsは使用できないのでコメントアウト
+        /*
         // ファイル読み込み
         const fs = require('fs');
         const jsonObject = JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -92,11 +116,41 @@ export class JsonFileManager
         this.Plan = tempData.Plan;  // 計画休数
         this.Sudden = tempData.Sudden;  // 突発休数
         this.Comment = tempData.Comment;    // 振り返り
+        */
+
+        // localStorageからデータを取得
+        let temp = localStorage.getItem("TargetHoliday");
+        if(temp != null)
+        {
+            this.TargetHoliday = JSON.parse(temp);  // 年末目標残数
+        }
+        temp = localStorage.getItem("Schedule");
+        if(temp != null)
+        {
+            this.Schedule = JSON.parse(temp);   // 取得予定
+        }
+        temp = localStorage.getItem("Plan");
+        if(temp != null)
+        {
+            this.Plan = JSON.parse(temp);   // 計画休数
+        }
+        temp = localStorage.getItem("Sudden");
+        if(temp != null)
+        {
+            this.Sudden = JSON.parse(temp); // 突発休数
+        }
+        temp = localStorage.getItem("Comment");
+        if(temp != null)
+        {
+            this.Comment = JSON.parse(temp);   // 振り返り
+        }
     }
 
     // JSON有給休暇ファイル書き込み
     private saveHolidayHolidayFile(filePath: string): void
     {
+        // Reactではfsは使用できないのでコメントアウト
+        /*
         const fs = require('fs');
         let saveData = {
             TargetHoliday: this.TargetHoliday,  // 年末目標残数
@@ -109,6 +163,14 @@ export class JsonFileManager
         // ファイル書き込み
         let jsonObject = JSON.stringify({HolidayData: saveData}, null, ' ')
         fs.writeFileSync(filePath, jsonObject);
+        */
+
+        // localStorageにデータを保存
+        localStorage.setItem("TargetHoliday", JSON.stringify(this.TargetHoliday));  // 年末目標残数
+        localStorage.setItem("Schedule", JSON.stringify(this.Schedule));    // 取得予定
+        localStorage.setItem("Plan", JSON.stringify(this.Plan));    // 突発休数
+        localStorage.setItem("Sudden", JSON.stringify(this.Sudden));    // 突発休数
+        localStorage.setItem("Comment", JSON.stringify(this.Comment));  // 振り返り
     }
 
     // 現時点残数計算
