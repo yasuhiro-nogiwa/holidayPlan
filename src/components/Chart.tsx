@@ -26,9 +26,15 @@ const Chart = () => {
   ]
 
   function getGraphData( typeKey: string) {
-    var retData: Array<number> = new Array(12);
+    let retData: Array<number>=[];
     for (const key in monthArray) {
-      retData.push = GetApi(typeKey, key);
+
+      let val = GetApi(typeKey, monthArray[key])
+      console.log(val);
+      if (!val || val < 0) {
+        val = 0;
+      }
+      retData.push(val);
     }
     return retData;
   }
