@@ -5,7 +5,7 @@ import GetApi from './GetApi';
 const Chart = () => {
 
   const monthArray = [
-    "aplil",
+    "april",
     "may",
     "june",
     "july",
