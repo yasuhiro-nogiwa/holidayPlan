@@ -1,16 +1,31 @@
 import React, { ChangeEvent, FunctionComponent, useState } from 'react'
+import GetApi from './GetApi';
+import SetApi from './SetApi';
 
 const App: FunctionComponent = () => {
 
+//   getapi
+// jsonから値をとってくる
+
+// setapi
+// jsonに値をセット
+
   const titles = ['取得予定', '計画休数', '突発休数'];
+  const titlesID = ['schedule', 'plan', 'sudden'];
 
   const [cells, setCells] = useState([
-    { April: '1', May: '1', June: '1', July: '1', August: '1', September: '1', October: '1',
-  November: '1', December: '1', January: '1', February: '1', March: '1' },
-    { April: '1', May: '1', June: '1', July: '1', August: '1', September: '1', October: '1',
-    November: '1', December: '1', January: '1', February: '1', March: '1' },
-    { April: '1', May: '1', June: '1', July: '1', August: '1', September: '1', October: '1',
-    November: '1', December: '1', January: '1', February: '1', March: '1' },
+    { april: GetApi("schedule", "aplil"), may: GetApi("schedule", "may"), june: GetApi("schedule", "june"), 
+    july: GetApi("schedule", "july"), august: GetApi("schedule", "august"), september: GetApi("schedule", "september"),
+    october: GetApi("schedule", "october"), november: GetApi("schedule", "november"), december: GetApi("schedule", "december"),
+    january: GetApi("schedule", "january"), february: GetApi("schedule", "february"), march: GetApi("schedule", "march") },
+    { april: GetApi("plan", "aplil"), may: GetApi("plan", "may"), june: GetApi("plan", "june"), 
+    july: GetApi("schedule", "july"), august: GetApi("schedule", "august"), september: GetApi("schedule", "september"),
+    october: GetApi("plan", "october"), november: GetApi("plan", "november"), december: GetApi("plan", "december"),
+    january: GetApi("plan", "january"), february: GetApi("plan", "february"), march: GetApi("plan", "march") },
+    { april: GetApi("sudden", "aplil"), may: GetApi("sudden", "may"), june: GetApi("sudden", "june"), 
+    july: GetApi("schedule", "july"), august: GetApi("schedule", "august"), september: GetApi("schedule", "september"),
+    october: GetApi("sudden", "october"), november: GetApi("sudden", "november"), december: GetApi("sudden", "december"),
+    january: GetApi("sudden", "january"), february: GetApi("sudden", "february"), march: GetApi("sudden", "march") },
   ])
 
   // 入力時の処理
@@ -23,7 +38,34 @@ const App: FunctionComponent = () => {
     _cells[index] = { ..._cells[index], [key]: event.target.value }
     setCells(_cells)
 
-    console.log(cells)
+    // 一つ前の情報が表で渡ってくる
+    // console.log(cells)
+
+    // 最新の情報が渡ってくるが1つの値でしか渡ってこない
+    // 表ではない
+    // console.log(event.target.value)
+
+    // 行の情報が入っている(0スタート)
+    // console.log(index)
+    // console.log(titles[index])
+    // console.log(titlesID[index])
+  
+    // 列(月)の情報が入っている(aprilスタート)
+    // console.log(key)
+
+    // 入力した値
+    // console.log(event.target.value)
+
+    SetApi(titlesID[index], key, event.target.value)
+
+    // console.log(SetApi(titlesID[index], key, event.target.value))
+    console.log("iwawa")
+    console.log(GetApi("schedule", "may"))
+
+    // {index === 0 ? SetApi(titlesID[index], key, 11) 
+    //   : index === 1 ? SetApi("schedule", key, 11) 
+    //   : SetApi("schedule", key, 11) 
+    // }
   }
 
   return (
@@ -53,40 +95,40 @@ const App: FunctionComponent = () => {
             <p>{titles[i]}</p>
             
             <td>
-              <input onChange={onChangeCell(i, 'April')} value={cell.April} />
+              <input style={{ width: 45, height: 20 }} onChange={onChangeCell(i, 'april')} value={cell.april} />
             </td>
             <td>
-              <input onChange={onChangeCell(i, 'May')} value={cell.May} />
+              <input style={{ width: 45, height: 20 }} onChange={onChangeCell(i, 'may')} value={cell.may} />
             </td>
             <td>
-              <input onChange={onChangeCell(i, 'June')} value={cell.June} />
+              <input style={{ width: 45, height: 20 }} onChange={onChangeCell(i, 'june')} value={cell.june} />
             </td>
             <td>
-              <input onChange={onChangeCell(i, 'July')} value={cell.July} />
+              <input style={{ width: 45, height: 20 }} onChange={onChangeCell(i, 'july')} value={cell.july} />
             </td>
             <td>
-              <input onChange={onChangeCell(i, 'August')} value={cell.August} />
+              <input style={{ width: 45, height: 20 }} onChange={onChangeCell(i, 'august')} value={cell.august} />
             </td>
             <td>
-              <input onChange={onChangeCell(i, 'September')} value={cell.September} />
+              <input style={{ width: 45, height: 20 }}onChange={onChangeCell(i, 'september')} value={cell.september} />
             </td>
             <td>
-              <input onChange={onChangeCell(i, 'October')} value={cell.October} />
+              <input style={{ width: 45, height: 20 }} onChange={onChangeCell(i, 'october')} value={cell.october} />
             </td>
             <td>
-              <input onChange={onChangeCell(i, 'November')} value={cell.November} />
+              <input style={{ width: 45, height: 20 }} onChange={onChangeCell(i, 'november')} value={cell.november} />
             </td>
             <td>
-              <input onChange={onChangeCell(i, 'December')} value={cell.December} />
+              <input style={{ width: 45, height: 20 }} onChange={onChangeCell(i, 'december')} value={cell.december} />
             </td>
             <td>
-              <input onChange={onChangeCell(i, 'January')} value={cell.January} />
+              <input style={{ width: 45, height: 20 }} onChange={onChangeCell(i, 'january')} value={cell.january} />
             </td>
             <td>
-              <input onChange={onChangeCell(i, 'February')} value={cell.February} />
+              <input style={{ width: 45, height: 20 }} onChange={onChangeCell(i, 'february')} value={cell.february} />
             </td>
             <td>
-              <input onChange={onChangeCell(i, 'March')} value={cell.March} />
+              <input style={{ width: 45, height: 20 }} onChange={onChangeCell(i, 'march')} value={cell.march} />
             </td>
           </tr>
         ))}

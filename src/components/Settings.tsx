@@ -5,55 +5,59 @@ import SetApi from './SetApi';
 const Settings: FunctionComponent = () => {
 
   const titles = ['氏名', '年休残数', '年末目標残数', '現時点残数'];
-
-    const [cells, setSells] = useState([
-      { name: '0', stock: '1', last: '2', now: '5'},
-      ])
-
-    const [nameVal, setTextVal] = useState('');
-    const [totalVal, setTextVal1] = useState('');
-    const [lastVal, setTextVal2] = useState('');
-    const [nowVal, setTextVal3] = useState('');
+  
+    const [nameVal, setNameVal] = useState(GetApi("name", "dummy"));
+    const [totalVal, setTotalVal] = useState(GetApi("totalHoriday", "dummy"));
+    const [lastVal, setsetLastVal] = useState(GetApi("targetHoliday", "dummy"));
+    const [nowVal, setNowVal] = useState(GetApi("remain", "dummy"));
 
     const handleInputNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       e.preventDefault();
-      setTextVal(e.target.value);
-      console.log(e.target.value);
+      setNameVal(e.target.value);
+      SetApi("name","dummy",e.target.value);
+      // console.log(e.target.value);
     }
 
     const handleInputTotalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       e.preventDefault();
-      setTextVal1(e.target.value);
-      console.log(e.target.value);
+      setTotalVal(e.target.value);
+      SetApi("totalHoriday","dummy",e.target.value);
+      // console.log(e.target.value);
     }
 
     const handleInputLastChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       e.preventDefault();
-      setTextVal2(e.target.value);
-      console.log(e.target.value);
+      setsetLastVal(e.target.value);
+      SetApi("targetHoliday","dummy",e.target.value);
+      // console.log(e.target.value);
     }
 
     const handleInputNowChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       e.preventDefault();
-      setTextVal3(e.target.value);
-      console.log(e.target.value);
+      setNowVal(e.target.value);
+      SetApi("remain","dummy",e.target.value);
+      // console.log(e.target.value);
     }
 
-   let name =function() {
-        return GetApi("name", "dummy");
-    }
+    // const handleInputData = (item: string, month: string, e: React.ChangeEvent<HTMLInputElement>) => {
 
-    let totalHoriday =function() {
-        return GetApi("totalHoriday", "dummy");
-    }
+    // }
 
-    let targetHoliday =function() {
-        return GetApi("targetHoliday", "dummy");
-    }
+//    let name =function() {
+//         return GetApi("name", "dummy");
+//     }
 
-    let remain =function() {
-        return GetApi("remain", "dummy");
-    }
+//     let totalHoriday =function() {
+//         return GetApi("totalHoriday", "dummy");
+//     }
+
+//     let targetHoliday =function() {
+//         return GetApi("targetHoliday", "dummy");
+//     }
+
+//     let remain =function() {
+//         return GetApi("remain", "dummy");
+//     }
 
     return (
         
@@ -64,7 +68,7 @@ const Settings: FunctionComponent = () => {
                   <td>
                     <input
                       style={{ width: 100, height: 20 }}
-                      value={name()}
+                      value={nameVal}
                       onChange={handleInputNameChange}/>
                   </td>
               </tr>
@@ -73,7 +77,7 @@ const Settings: FunctionComponent = () => {
                   <td>
                     <input
                       style={{ width: 100, height: 20 }}
-                      value={totalHoriday()}
+                      value={totalVal}
                       onChange={handleInputTotalChange}/>
                   </td>
               </tr>
@@ -82,7 +86,7 @@ const Settings: FunctionComponent = () => {
                   <td>
                     <input
                       style={{ width: 100, height: 20 }}
-                      value={targetHoliday()}
+                      value={lastVal}
                       onChange={handleInputLastChange}/>
                   </td>
               </tr>
@@ -91,7 +95,7 @@ const Settings: FunctionComponent = () => {
                   <td>
                     <input
                       style={{ width: 100, height: 20 }}
-                      value={remain()}
+                      value={nowVal}
                       onChange={handleInputNowChange}/>
                   </td>
               </tr>
