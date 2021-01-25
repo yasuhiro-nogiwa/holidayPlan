@@ -19,11 +19,11 @@ const App: FunctionComponent = () => {
     october: GetApi("schedule", "october"), november: GetApi("schedule", "november"), december: GetApi("schedule", "december"),
     january: GetApi("schedule", "january"), february: GetApi("schedule", "february"), march: GetApi("schedule", "march") },
     { april: GetApi("plan", "april"), may: GetApi("plan", "may"), june: GetApi("plan", "june"), 
-    july: GetApi("schedule", "july"), august: GetApi("schedule", "august"), september: GetApi("schedule", "september"),
+    july: GetApi("plan", "july"), august: GetApi("plan", "august"), september: GetApi("plan", "september"),
     october: GetApi("plan", "october"), november: GetApi("plan", "november"), december: GetApi("plan", "december"),
     january: GetApi("plan", "january"), february: GetApi("plan", "february"), march: GetApi("plan", "march") },
     { april: GetApi("sudden", "april"), may: GetApi("sudden", "may"), june: GetApi("sudden", "june"), 
-    july: GetApi("schedule", "july"), august: GetApi("schedule", "august"), september: GetApi("schedule", "september"),
+    july: GetApi("sudden", "july"), august: GetApi("sudden", "august"), september: GetApi("sudden", "september"),
     october: GetApi("sudden", "october"), november: GetApi("sudden", "november"), december: GetApi("sudden", "december"),
     january: GetApi("sudden", "january"), february: GetApi("sudden", "february"), march: GetApi("sudden", "march") },
   ])
