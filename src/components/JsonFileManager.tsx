@@ -11,7 +11,7 @@ export class JsonFileManager
  
     Position: {[key: string]: number}=
     {
-        "aplil": 0,
+        "april": 0,
         "may": 1,
         "june": 2,
         "july": 3,
@@ -213,7 +213,7 @@ export class JsonFileManager
     private getMonthlyHoliday(month: number): number    // 月を指定
     {
         let ret = 0;
-        for(let i=0; i<month; i++)
+        for(let i=0; i<=month; i++)
         {
             // 計画休+突発休
             ret += this.Plan[i] + this.Sudden[i];
@@ -226,7 +226,7 @@ export class JsonFileManager
     private getMonthlySchedule(month: number): number    // 月を指定
     {
         let totalSchedule = 0;
-        for(let i=0; i<month; i++)
+        for(let i=0; i<=month; i++)
         {
             // 取得予定
             totalSchedule += this.Schedule[i];
@@ -239,7 +239,7 @@ export class JsonFileManager
     private getMonthlyExecute(month: number): number    // 月を指定
     {
         let totalExecute = 0;
-        for(let i=0; i<month; i++)
+        for(let i=0; i<=month; i++)
         {
             // 計画休+突発休
             totalExecute += this.Plan[i] + this.Sudden[i];
@@ -360,12 +360,12 @@ export class JsonFileManager
         if(item === "name")
         {
             // 名称
-            this.Name = value;
+            this.Name = String(value);
         }
         else if(item === "totalholiday")
         {
             // 年休総数
-            this.TotalHoliday = value;
+            this.TotalHoliday = Number(value);
         }
 
         // JSONファイル書き込み
@@ -384,27 +384,27 @@ export class JsonFileManager
         if(item === "targetholiday")
         {
             // 年末目標残数
-            this.TargetHoliday = value;
+            this.TargetHoliday = Number(value);
         }
         else if(item === "schedule")
         {
             // 取得予定
-            this.Schedule[index] = value;
+            this.Schedule[index] = Number(value);
         }
         else if(item === "plan")
         {
             // 計画休数
-            this.Plan[index] = value;
+            this.Plan[index] = Number(value);
         }
         else if(item === "sudden")
         {
             // 突発休数
-            this.Sudden[index] = value;
+            this.Sudden[index] = Number(value);
         }
         else if(item === "comment")
         {
             // 振り返り
-            this.Comment = value;
+            this.Comment = String(value);
         }
 
         // JSONファイル書き込み
