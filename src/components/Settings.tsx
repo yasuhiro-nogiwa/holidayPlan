@@ -7,8 +7,8 @@ const Settings: FunctionComponent = () => {
   const titles = ['氏名', '年休残数', '年末目標残数', '現時点残数'];
   
     const [nameVal, setNameVal] = useState(GetApi("name", "dummy"));
-    const [totalVal, setTotalVal] = useState(GetApi("totalHoriday", "dummy"));
-    const [lastVal, setsetLastVal] = useState(GetApi("targetHoliday", "dummy"));
+    const [totalVal, setTotalVal] = useState(GetApi("totalhoriday", "dummy"));
+    const [lastVal, setsetLastVal] = useState(GetApi("targetholiday", "dummy"));
     const [nowVal, setNowVal] = useState(GetApi("remain", "dummy"));
 
     const handleInputNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,14 +21,14 @@ const Settings: FunctionComponent = () => {
     const handleInputTotalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       e.preventDefault();
       setTotalVal(e.target.value);
-      SetApi("totalHoriday","dummy",e.target.value);
+      SetApi("totalhoriday","dummy",e.target.value);
       // console.log(e.target.value);
     }
 
     const handleInputLastChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       e.preventDefault();
       setsetLastVal(e.target.value);
-      SetApi("targetHoliday","dummy",e.target.value);
+      SetApi("targetholiday","dummy",e.target.value);
       // console.log(e.target.value);
     }
 

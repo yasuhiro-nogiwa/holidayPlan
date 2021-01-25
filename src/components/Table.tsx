@@ -59,7 +59,6 @@ const App: FunctionComponent = () => {
     SetApi(titlesID[index], key, event.target.value)
 
     // console.log(SetApi(titlesID[index], key, event.target.value))
-    console.log("iwawa")
     console.log(GetApi("schedule", "may"))
 
     // {index === 0 ? SetApi(titlesID[index], key, 11) 
