@@ -6,7 +6,7 @@ function GetApi(item: string, month: string = "dummy"): any
     let ret: any;
     let fileManager = JsonFileManager.getInstance();
 
-    if(item === "name" || item === "totalHoriday")
+    if(item === "name" || item === "totalholiday")
     {
         ret = fileManager.GetPersonalData(item);
     }
@@ -20,8 +20,3 @@ function GetApi(item: string, month: string = "dummy"): any
 
 export default GetApi;
 
-console.log(GetApi("name"));
-console.log(GetApi("comment"));
-
-console.log(GetApi("schedule", "aplil"));
-console.log(GetApi("schedule", "december"));

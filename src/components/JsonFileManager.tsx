@@ -2,7 +2,7 @@
 export class JsonFileManager
 {    
     Name: string;   // 名称
-    TotalHoriday: number;   // 年休総数
+    TotalHoliday: number;   // 年休総数
     TargetHoliday: number;  // 年末目標残数
     Schedule: Array<number>;    // 取得予定
     Plan: Array<number>;    // 計画休数
@@ -45,7 +45,7 @@ export class JsonFileManager
     // コンストラクター
     private constructor(){
         this.Name = "";
-        this.TotalHoriday = 0;
+        this.TotalHoliday = 0;
         this.TargetHoliday = 0;
         this.Schedule = Array(12).fill(0);
         this.Plan = Array(12).fill(0);
@@ -64,7 +64,7 @@ export class JsonFileManager
         const tempData = jsonObject.PersonalData;
        
         this.Name = tempData.Name;  // 名称
-        this.TotalHoriday = tempData.TotalHoriday;  // 年休総数
+        this.TotalHoliday = tempData.TotalHoliday;  // 年休総数
         */
 
         // localStorageからデータを取得
@@ -73,10 +73,10 @@ export class JsonFileManager
         {
             this.Name = JSON.parse(temp);   // 名称
         }
-        temp = localStorage.getItem("TotalHoriday");
+        temp = localStorage.getItem("TotalHoliday");
         if(temp != null)
         {
-            this.TotalHoriday = JSON.parse(temp);   // 年休総数
+            this.TotalHoliday = JSON.parse(temp);   // 年休総数
         }
     }
 
@@ -88,7 +88,7 @@ export class JsonFileManager
         const fs = require('fs');
         let saveData = {
             Name: this.Name,  // 名称
-            TotalHoriday: this.TotalHoriday    // 年休総数
+            TotalHoliday: this.TotalHoliday    // 年休総数
         };
 
         // ファイル書き込み
@@ -98,7 +98,7 @@ export class JsonFileManager
 
         // localStorageにデータを保存
         localStorage.setItem("Name", JSON.stringify(this.Name));    // 名称
-        localStorage.setItem("TotalHoriday", JSON.stringify(this.TotalHoriday)); // 年休総数
+        localStorage.setItem("TotalHoliday", JSON.stringify(this.TotalHoliday)); // 年休総数
     }
 
     // JSON有給休暇ファイル読み込み
@@ -184,7 +184,7 @@ export class JsonFileManager
         },0);
 
         // 年休総数-(計画休総数+突発休総数)
-        return this.TotalHoriday - (totalPlan + totalSudden);
+        return this.TotalHoliday - (totalPlan + totalSudden);
     }
 
     // 円グラフの計画休
@@ -232,7 +232,7 @@ export class JsonFileManager
             totalSchedule += this.Schedule[i];
         }
 
-        return this.TotalHoriday - totalSchedule;
+        return this.TotalHoliday - totalSchedule;
     }
 
     // 折れ線グラフの実行(年休総数-(月ごとの計画休数累計+月ごとの突発休数累計)
@@ -245,7 +245,7 @@ export class JsonFileManager
             totalExecute += this.Plan[i] + this.Sudden[i];
         }
 
-        return this.TotalHoriday - totalExecute;
+        return this.TotalHoliday - totalExecute;
     }
 
     // 個人情報データ取得API
@@ -261,10 +261,10 @@ export class JsonFileManager
             // 名称
             ret = this.Name;
         }
-        else if(item === "totalHoriday")
+        else if(item === "totalholiday")
         {
             // 年休総数
-            ret = this.TotalHoriday;
+            ret = this.TotalHoliday;
         }
 
         return ret;
@@ -282,7 +282,7 @@ export class JsonFileManager
         // 月から配列の番号を取得
         let index = this.Position[month];
 
-        if(item === "targetHoliday")
+        if(item === "targetholiday")
         {
             // 年末目標残数
             ret = this.TargetHoliday;
@@ -362,10 +362,10 @@ export class JsonFileManager
             // 名称
             this.Name = value;
         }
-        else if(item === "totalHoriday")
+        else if(item === "totalholiday")
         {
             // 年休総数
-            this.TotalHoriday = value;
+            this.TotalHoliday = value;
         }
 
         // JSONファイル書き込み
@@ -381,10 +381,10 @@ export class JsonFileManager
         // 月から配列の番号を取得
         let index = this.Position[month];
         
-        if(item === "targetHoliday")
+        if(item === "targetholiday")
         {
             // 年末目標残数
-            this.TotalHoriday = value;
+            this.TargetHoliday = value;
         }
         else if(item === "schedule")
         {

@@ -7,7 +7,7 @@ const Settings: FunctionComponent = () => {
   const titles = ['氏名', '年休残数', '年末目標残数', '現時点残数'];
   
     const [nameVal, setNameVal] = useState(GetApi("name", "dummy"));
-    const [totalVal, setTotalVal] = useState(GetApi("totalhoriday", "dummy"));
+    const [totalVal, setTotalVal] = useState(GetApi("totalholiday", "dummy"));
     const [lastVal, setsetLastVal] = useState(GetApi("targetholiday", "dummy"));
     const [nowVal, setNowVal] = useState(GetApi("remain", "dummy"));
 
@@ -21,8 +21,10 @@ const Settings: FunctionComponent = () => {
     const handleInputTotalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       e.preventDefault();
       setTotalVal(e.target.value);
-      SetApi("totalhoriday","dummy",e.target.value);
+      SetApi("totalholiday","dummy",e.target.value);
       // console.log(e.target.value);
+
+      setNowVal(GetApi("remain", "dummy"));
     }
 
     const handleInputLastChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,12 +34,12 @@ const Settings: FunctionComponent = () => {
       // console.log(e.target.value);
     }
 
-    const handleInputNowChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      e.preventDefault();
-      setNowVal(e.target.value);
-      SetApi("remain","dummy",e.target.value);
-      // console.log(e.target.value);
-    }
+    // const handleInputNowChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //   e.preventDefault();
+    //   setNowVal(e.target.value);
+    //   SetApi("remain","dummy",e.target.value);
+    //   // console.log(e.target.value);
+    // }
 
     // const handleInputData = (item: string, month: string, e: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -47,8 +49,8 @@ const Settings: FunctionComponent = () => {
 //         return GetApi("name", "dummy");
 //     }
 
-//     let totalHoriday =function() {
-//         return GetApi("totalHoriday", "dummy");
+//     let totalHoliday =function() {
+//         return GetApi("totalHoliday", "dummy");
 //     }
 
 //     let targetHoliday =function() {
@@ -96,7 +98,7 @@ const Settings: FunctionComponent = () => {
                     <input
                       style={{ width: 100, height: 20 }}
                       value={nowVal}
-                      onChange={handleInputNowChange}/>
+                      />
                   </td>
               </tr>
             </tbody>

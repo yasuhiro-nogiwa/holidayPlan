@@ -18,6 +18,3 @@ function SetApi(item: string, month: string, value: any): void
 }
 
 export default SetApi;
-
-SetApi("schedule", "aplil", 11);
-SetApi("name","dummy","Taro");
