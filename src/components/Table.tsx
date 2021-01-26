@@ -4,14 +4,10 @@ import SetApi from './SetApi';
 
 const App: FunctionComponent = () => {
 
-//   getapi
-// jsonから値をとってくる
-
-// setapi
-// jsonに値をセット
-
   const titles = ['取得予定', '計画休数', '突発休数'];
   const titlesID = ['schedule', 'plan', 'sudden'];
+
+  const numcheck = /^[0-9\b]+$/;
 
   const [cells, setCells] = useState([
     { april: GetApi("schedule", "april"), may: GetApi("schedule", "may"), june: GetApi("schedule", "june"), 
@@ -29,70 +25,63 @@ const App: FunctionComponent = () => {
   ])
 
   // 入力時の処理
-  // 入力を行うとcells配列の中身が受け取れる
-  // ただし入力した際の1つ前の結果が得られる
   const onChangeCell = (index: number, key: string) => (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    const _cells = [...cells]
-    _cells[index] = { ..._cells[index], [key]: event.target.value }
-    setCells(_cells)
+    if (event.target.value === '' || numcheck.test(event.target.value)) {
 
-    // 一つ前の情報が表で渡ってくる
-    // console.log(cells)
+      let checkResult = dayCheck(event.target.value)
 
-    // 最新の情報が渡ってくるが1つの値でしか渡ってこない
-    // 表ではない
-    // console.log(event.target.value)
+      console.log(checkResult)
 
-    // 行の情報が入っている(0スタート)
-    // console.log(index)
-    // console.log(titles[index])
-    // console.log(titlesID[index])
-  
-    // 列(月)の情報が入っている(aprilスタート)
-    // console.log(key)
+      if(checkResult === true) {
+        const _cells = [...cells]
+      _cells[index] = { ..._cells[index], [key]: event.target.value }
+      setCells(_cells)
 
-    // 入力した値
-    // console.log(event.target.value)
+      SetApi(titlesID[index], key, event.target.value)
+      }
 
-    SetApi(titlesID[index], key, event.target.value)
+      
+    }
+  }
 
-    // console.log(SetApi(titlesID[index], key, event.target.value))
-    console.log(GetApi("schedule", "may"))
+  function dayCheck(inputTxt: string): boolean {
 
-    // {index === 0 ? SetApi(titlesID[index], key, 11) 
-    //   : index === 1 ? SetApi("schedule", key, 11) 
-    //   : SetApi("schedule", key, 11) 
-    // }
+    let result: boolean = false
+    let inputNum = Number(inputTxt)
+
+    if(inputNum >= 0 && inputNum <= 31) {
+      result = true
+    }
+    
+    return result;
   }
 
   return (
     
-    <table>
+    <table className="ui celled table" style={{textAlign: "center"}}>
       <thead>
         <tr>
-          <td>{''}</td>
-          <td>{'4月'}</td>
-          <td>{'5月'}</td>
-          <td>{'6月'}</td>
-          <td>{'7月'}</td>
-          <td>{'8月'}</td>
-          <td>{'9月'}</td>
-          <td>{'10月'}</td>
-          <td>{'11月'}</td>
-          <td>{'12月'}</td>
-          <td>{'1月'}</td>
-          <td>{'2月'}</td>
-          <td>{'3月'}</td>
+          <th>{''}</th>
+          <th>{'4月'}</th>
+          <th>{'5月'}</th>
+          <th>{'6月'}</th>
+          <th>{'7月'}</th>
+          <th>{'8月'}</th>
+          <th>{'9月'}</th>
+          <th>{'10月'}</th>
+          <th>{'11月'}</th>
+          <th>{'12月'}</th>
+          <th>{'1月'}</th>
+          <th>{'2月'}</th>
+          <th>{'3月'}</th>
         </tr>
       </thead>
       <tbody>
         {cells.map((cell, i) => (
           <tr key={i}>
-
-            <p>{titles[i]}</p>
-            
+            <th><td>{titles[i]}</td></th>
             <td>
               <input style={{ width: 45, height: 20 }} onChange={onChangeCell(i, 'april')} value={cell.april} />
             </td>

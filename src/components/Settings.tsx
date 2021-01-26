@@ -4,69 +4,81 @@ import SetApi from './SetApi';
 
 const Settings: FunctionComponent = () => {
 
-  const titles = ['氏名', '年休残数', '年末目標残数', '現時点残数'];
+  const titles = ['氏名', '年休総数', '年末目標残数', '現時点残数'];
+
+  const numcheck = /^[0-9\b]+$/;
   
     const [nameVal, setNameVal] = useState(GetApi("name", "dummy"));
     const [totalVal, setTotalVal] = useState(GetApi("totalholiday", "dummy"));
-    const [lastVal, setsetLastVal] = useState(GetApi("targetholiday", "dummy"));
+    const [lastVal, setLastVal] = useState(GetApi("targetholiday", "dummy"));
     const [nowVal, setNowVal] = useState(GetApi("remain", "dummy"));
 
     const handleInputNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (e.target.value.length <= 300) {
       e.preventDefault();
       setNameVal(e.target.value);
       SetApi("name","dummy",e.target.value);
-      // console.log(e.target.value);
+      }
     }
 
     const handleInputTotalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       e.preventDefault();
-      setTotalVal(e.target.value);
-      SetApi("totalholiday","dummy",e.target.value);
-      // console.log(e.target.value);
 
-      setNowVal(GetApi("remain", "dummy"));
+      if (e.target.value === '' || numcheck.test(e.target.value)) {
+
+        let checkResult: boolean = dayCheck(e.target.value, "totalholiday")
+
+        if (checkResult === true) {
+          setTotalVal(e.target.value);
+          SetApi("totalholiday","dummy",e.target.value);
+          setNowVal(GetApi("remain", "dummy"));
+        }
+     }
     }
 
     const handleInputLastChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       e.preventDefault();
-      setsetLastVal(e.target.value);
-      SetApi("targetholiday","dummy",e.target.value);
-      // console.log(e.target.value);
+
+      if (e.target.value === '' || numcheck.test(e.target.value)) {
+
+        let checkResult = dayCheck(e.target.value, "targetholiday")
+
+        if (e.target.value === '') {
+          checkResult = true
+        } 
+        
+        if (checkResult === true) {
+          setLastVal(e.target.value);
+          SetApi("targetholiday","dummy",e.target.value);
+        }
+      }
     }
 
-    // const handleInputNowChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //   e.preventDefault();
-    //   setNowVal(e.target.value);
-    //   SetApi("remain","dummy",e.target.value);
-    //   // console.log(e.target.value);
-    // }
+    function dayCheck(inputTxt: string, label: string): boolean {
 
-    // const handleInputData = (item: string, month: string, e: React.ChangeEvent<HTMLInputElement>) => {
+      let result: boolean = false
+      let inputNum = Number(inputTxt)
 
-    // }
+      if(label === 'totalholiday') {
+        if(inputNum >= 0) {
+          result = true
+        }
 
-//    let name =function() {
-//         return GetApi("name", "dummy");
-//     }
+      } else {
 
-//     let totalHoliday =function() {
-//         return GetApi("totalHoliday", "dummy");
-//     }
-
-//     let targetHoliday =function() {
-//         return GetApi("targetHoliday", "dummy");
-//     }
-
-//     let remain =function() {
-//         return GetApi("remain", "dummy");
-//     }
-
+        if(inputNum >= 5 && inputNum <= 35 ) {
+          result = true
+        }
+      }
+      return result;
+    }
+    
     return (
         
-        <table>
+        <table className="ui celled table" style={{width:250}}>
             <tbody>
               <tr>
-                <p>氏名</p>
+                <th><td>氏名</td></th>
                   <td>
                     <input
                       style={{ width: 100, height: 20 }}
@@ -75,7 +87,7 @@ const Settings: FunctionComponent = () => {
                   </td>
               </tr>
               <tr>
-                <p>年末残数</p>
+                <th><td>年末総数</td></th>
                   <td>
                     <input
                       style={{ width: 100, height: 20 }}
@@ -84,7 +96,7 @@ const Settings: FunctionComponent = () => {
                   </td>
               </tr>
               <tr>
-                <p>年末目標残数</p>
+                <th><td>年末目標残数</td></th>
                   <td>
                     <input
                       style={{ width: 100, height: 20 }}
@@ -93,7 +105,7 @@ const Settings: FunctionComponent = () => {
                   </td>
               </tr>
               <tr>
-                <p>現時点残数</p>
+                <th><td>現時点残数</td></th>
                   <td>
                     <input
                       style={{ width: 100, height: 20 }}
