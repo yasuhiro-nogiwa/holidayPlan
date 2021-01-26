@@ -9,17 +9,23 @@ const personalItems = [
 // データ設定
 function SetApi(item: string, month: string, value: any): void 
 {
+    let ret: boolean = false;
     let fileManager = JsonFileManager.getInstance();
 
     if(personalItems.indexOf(item) >= 0)
     {
         // 個人情報データ設定
-        fileManager.SetPersonalData(item, value);
+        ret = fileManager.SetPersonalData(item, value);
     }
     else
     {
         // 有給休暇データ設定
-        fileManager.SetHolidayData(month, item, value);
+        ret = fileManager.SetHolidayData(month, item, value);
+    }
+
+    if(ret !== true)
+    {
+        // エラーの場合
     }
 }
 

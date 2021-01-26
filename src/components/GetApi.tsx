@@ -23,6 +23,11 @@ function GetApi(item: string, month: string = "dummy"): any
         ret = fileManager.GetHolidayData(item, month);
     }
 
+    if(ret === null)
+    {
+        // エラーの場合
+    }
+
     return ret;
 }
 
