@@ -9,7 +9,7 @@ const personalItems = [
 // データ取得
 function GetApi(item: string, month: string = "dummy"): any 
 {
-    let ret: any;
+    let ret: any = null;
     let fileManager = JsonFileManager.getInstance();
 
     if(personalItems.indexOf(item) >= 0)
@@ -21,11 +21,6 @@ function GetApi(item: string, month: string = "dummy"): any
     {
         // 有給休暇データ取得
         ret = fileManager.GetHolidayData(item, month);
-    }
-
-    if(ret === null)
-    {
-        // エラーの場合
     }
 
     return ret;

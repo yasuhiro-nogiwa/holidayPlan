@@ -7,7 +7,7 @@ const personalItems = [
 ];
 
 // データ設定
-function SetApi(item: string, month: string, value: any): void 
+function SetApi(item: string, month: string, value: any): boolean 
 {
     let ret: boolean = false;
     let fileManager = JsonFileManager.getInstance();
@@ -23,10 +23,7 @@ function SetApi(item: string, month: string, value: any): void
         ret = fileManager.SetHolidayData(month, item, value);
     }
 
-    if(ret !== true)
-    {
-        // エラーの場合
-    }
+    return ret;
 }
 
 export default SetApi;
