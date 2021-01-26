@@ -53,20 +53,9 @@ export class JsonFileManager
         this.Comment = "";
     }
 
-    // JSON個人情報ファイル読み込み
-    private loadPersonalFile(filePath: string): void
+    // JSON個人情報データ読み込み
+    private loadPersonalData(): void
     {
-        // Reactではfsは使用できないのでコメントアウト
-        /*
-        // ファイル読み込み
-        const fs = require('fs');
-        const jsonObject = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-        const tempData = jsonObject.PersonalData;
-       
-        this.Name = tempData.Name;  // 名称
-        this.TotalHoliday = tempData.TotalHoliday;  // 年休総数
-        */
-
         // localStorageからデータを取得
         let temp = localStorage.getItem("Name");
         if(temp != null)
@@ -80,44 +69,17 @@ export class JsonFileManager
         }
     }
 
-    // JSON個人情報ファイル書き込み
-    private savePersonalFile(filePath: string): void
+    // JSON個人情報データ書き込み
+    private savePersonalData(): void
     {
-        // Reactではfsは使用できないのでコメントアウト
-        /*
-        const fs = require('fs');
-        let saveData = {
-            Name: this.Name,  // 名称
-            TotalHoliday: this.TotalHoliday    // 年休総数
-        };
-
-        // ファイル書き込み
-        let jsonObject = JSON.stringify({PersonalData: saveData}, null, ' ')
-        fs.writeFileSync(filePath, jsonObject);
-        */
-
         // localStorageにデータを保存
         localStorage.setItem("Name", JSON.stringify(this.Name));    // 名称
         localStorage.setItem("TotalHoliday", JSON.stringify(this.TotalHoliday)); // 年休総数
     }
 
-    // JSON有給休暇ファイル読み込み
-    private loadHolidayFile(filePath: string): void
+    // JSON有給休暇データ読み込み
+    private loadHolidayData(): void
     {
-        // Reactではfsは使用できないのでコメントアウト
-        /*
-        // ファイル読み込み
-        const fs = require('fs');
-        const jsonObject = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-        const tempData = jsonObject.HolidayData;
-
-        this.TargetHoliday = tempData.TargetHoliday;    // 年末目標残数
-        this.Schedule = tempData.Schedule;  // 取得予定
-        this.Plan = tempData.Plan;  // 計画休数
-        this.Sudden = tempData.Sudden;  // 突発休数
-        this.Comment = tempData.Comment;    // 振り返り
-        */
-
         // localStorageからデータを取得
         let temp = localStorage.getItem("TargetHoliday");
         if(temp != null)
@@ -146,25 +108,9 @@ export class JsonFileManager
         }
     }
 
-    // JSON有給休暇ファイル書き込み
-    private saveHolidayHolidayFile(filePath: string): void
+    // JSON有給休暇データ書き込み
+    private saveHolidayData(): void
     {
-        // Reactではfsは使用できないのでコメントアウト
-        /*
-        const fs = require('fs');
-        let saveData = {
-            TargetHoliday: this.TargetHoliday,  // 年末目標残数
-            Schedule: this.Schedule,    // 取得予定
-            Plan: this.Plan,    // 計画休数
-            Sudden: this.Sudden,    // 突発休数
-            Comment: this.Comment,  // 振り返り
-        };
-
-        // ファイル書き込み
-        let jsonObject = JSON.stringify({HolidayData: saveData}, null, ' ')
-        fs.writeFileSync(filePath, jsonObject);
-        */
-
         // localStorageにデータを保存
         localStorage.setItem("TargetHoliday", JSON.stringify(this.TargetHoliday));  // 年末目標残数
         localStorage.setItem("Schedule", JSON.stringify(this.Schedule));    // 取得予定
@@ -253,8 +199,8 @@ export class JsonFileManager
     {
         let ret: any;
 
-        // JSONファイル読み込み
-        this.loadPersonalFile("./PersonalData.json");
+        // lodalStorageデータ取得
+        this.loadPersonalData();
 
         if(item === "name")
         {
@@ -275,9 +221,9 @@ export class JsonFileManager
     {
         let ret: any;
 
-        // JSONファイル読み込み
-        this.loadPersonalFile("./PersonalData.json");
-        this.loadHolidayFile("./HolidayData.json");
+        // lodalStorageデータ取得
+        this.loadPersonalData();
+        this.loadHolidayData();
 
         // 月から配列の番号を取得
         let index = this.Position[month];
@@ -354,8 +300,8 @@ export class JsonFileManager
     // 個人情報データ設定API
     public SetPersonalData(item: string, value: any): void
     {
-        // JSONファイル読み込み
-        this.loadPersonalFile("./PersonalData.json");
+        // lodalStorageデータ取得
+        this.loadPersonalData();
 
         if(item === "name")
         {
@@ -368,15 +314,15 @@ export class JsonFileManager
             this.TotalHoliday = Number(value);
         }
 
-        // JSONファイル書き込み
-        this.savePersonalFile("./PersonalData.json");
+        // lodalStorageデータ保存
+        this.savePersonalData();
     }
 
     // 有給休暇データ設定API
     public SetHolidayData(month: string, item: string, value: any): void
     {
-        // JSONファイル読み込み
-        this.loadHolidayFile("./HolidayData.json");
+        // lodalStorageデータ取得
+        this.loadHolidayData();
 
         // 月から配列の番号を取得
         let index = this.Position[month];
@@ -407,7 +353,7 @@ export class JsonFileManager
             this.Comment = String(value);
         }
 
-        // JSONファイル書き込み
-        this.saveHolidayHolidayFile("./HolidayData.json");
+        // lodalStorageデータ保存
+        this.saveHolidayData();
     }
 }
