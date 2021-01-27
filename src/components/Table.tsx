@@ -73,7 +73,7 @@ const App: FunctionComponent<Props> = (props) => {
 
   return (
 
-    <table className="ui celled table" style={{ textAlign: "center", width: 1000 }}>
+    <table className="ui definition table" style={{ textAlign: "center", width: 1000 }}>
       <thead>
         <tr><th>{''}</th>
           <th>{'4月'}</th>
