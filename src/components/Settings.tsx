@@ -98,7 +98,7 @@ const Settings: FunctionComponent<Props> = (props) => {
           </td>
         </tr>
         <tr>
-          <td>今年度年末総数</td>
+          <td>今年度総数</td>
           <td>
             <input
               style={{ width: cellWidth, height: cellHeight, border:"none" }}

@@ -1,4 +1,3 @@
-import { isNumber } from "util";
 
 // JSONファイル管理クラス
 export class JsonFileManager
