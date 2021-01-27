@@ -46,8 +46,10 @@ function App() {
 
   return (
     <div className="App">
-      {/* ボタン用に50px開けておく */}
-      <div style={{ marginTop: '50px', marginLeft: 30, }}>
+      <div>
+        <h1 className="ui header" style={{ marginTop: 10, marginLeft: 30 }}>有給休暇計画</h1>
+      </div>
+      <div style={{ marginTop: '10px', marginLeft: 30, }}>
         <Settings changeApi={changeApi} />
         <Table changeApi={changeApi} />
       </div>
@@ -74,9 +76,9 @@ function App() {
     //年始総数+5 or 棒グラフの最大+5 or 15(最小値)
     let totalVal = GetApi("totalholiday", "dummy");
     let barValue = getGraphData("monthlyholiday").pop();
-    if (!barValue) {barValue = 0};
+    if (!barValue) { barValue = 0 };
     let value = totalVal > barValue ? totalVal + 5 : barValue + 5;
-    if (value > 15 ) {
+    if (value > 15) {
       return value;
     } else {
       return 15;
@@ -95,7 +97,7 @@ function App() {
     })
     return retData;
   }
-  
+
 }
 
 export default App;
