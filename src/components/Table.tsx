@@ -14,18 +14,24 @@ const App: FunctionComponent<Props> = (props) => {
   const numcheck = /^[0-9\b]+$/;
 
   const [cells, setCells] = useState([
-    { april: GetApi("schedule", "april"), may: GetApi("schedule", "may"), june: GetApi("schedule", "june"), 
-    july: GetApi("schedule", "july"), august: GetApi("schedule", "august"), september: GetApi("schedule", "september"),
-    october: GetApi("schedule", "october"), november: GetApi("schedule", "november"), december: GetApi("schedule", "december"),
-    january: GetApi("schedule", "january"), february: GetApi("schedule", "february"), march: GetApi("schedule", "march") },
-    { april: GetApi("plan", "april"), may: GetApi("plan", "may"), june: GetApi("plan", "june"), 
-    july: GetApi("plan", "july"), august: GetApi("plan", "august"), september: GetApi("plan", "september"),
-    october: GetApi("plan", "october"), november: GetApi("plan", "november"), december: GetApi("plan", "december"),
-    january: GetApi("plan", "january"), february: GetApi("plan", "february"), march: GetApi("plan", "march") },
-    { april: GetApi("sudden", "april"), may: GetApi("sudden", "may"), june: GetApi("sudden", "june"), 
-    july: GetApi("sudden", "july"), august: GetApi("sudden", "august"), september: GetApi("sudden", "september"),
-    october: GetApi("sudden", "october"), november: GetApi("sudden", "november"), december: GetApi("sudden", "december"),
-    january: GetApi("sudden", "january"), february: GetApi("sudden", "february"), march: GetApi("sudden", "march") },
+    {
+      april: GetApi("schedule", "april"), may: GetApi("schedule", "may"), june: GetApi("schedule", "june"),
+      july: GetApi("schedule", "july"), august: GetApi("schedule", "august"), september: GetApi("schedule", "september"),
+      october: GetApi("schedule", "october"), november: GetApi("schedule", "november"), december: GetApi("schedule", "december"),
+      january: GetApi("schedule", "january"), february: GetApi("schedule", "february"), march: GetApi("schedule", "march")
+    },
+    {
+      april: GetApi("plan", "april"), may: GetApi("plan", "may"), june: GetApi("plan", "june"),
+      july: GetApi("plan", "july"), august: GetApi("plan", "august"), september: GetApi("plan", "september"),
+      october: GetApi("plan", "october"), november: GetApi("plan", "november"), december: GetApi("plan", "december"),
+      january: GetApi("plan", "january"), february: GetApi("plan", "february"), march: GetApi("plan", "march")
+    },
+    {
+      april: GetApi("sudden", "april"), may: GetApi("sudden", "may"), june: GetApi("sudden", "june"),
+      july: GetApi("sudden", "july"), august: GetApi("sudden", "august"), september: GetApi("sudden", "september"),
+      october: GetApi("sudden", "october"), november: GetApi("sudden", "november"), december: GetApi("sudden", "december"),
+      january: GetApi("sudden", "january"), february: GetApi("sudden", "february"), march: GetApi("sudden", "march")
+    },
   ])
 
   // 入力時の処理
@@ -38,18 +44,18 @@ const App: FunctionComponent<Props> = (props) => {
 
       console.log(checkResult)
 
-      if(checkResult === true) {
+      if (checkResult === true) {
         const _cells = [...cells]
-      _cells[index] = { ..._cells[index], [key]: event.target.value }
-      setCells(_cells)
+        _cells[index] = { ..._cells[index], [key]: event.target.value }
+        setCells(_cells)
 
-      SetApi(titlesID[index], key, event.target.value)
+        SetApi(titlesID[index], key, event.target.value)
 
         props.changeApi();
 
       }
 
-      
+
     }
   }
 
@@ -58,19 +64,18 @@ const App: FunctionComponent<Props> = (props) => {
     let result: boolean = false
     let inputNum = Number(inputTxt)
 
-    if(inputNum >= 0 && inputNum <= 31) {
+    if (inputNum >= 0 && inputNum <= 31) {
       result = true
     }
-    
+
     return result;
   }
 
   return (
-    
-    <table className="ui celled table" style={{textAlign: "center"}}>
+
+    <table className="ui celled table" style={{ textAlign: "center", width: 1000 }}>
       <thead>
-        <tr>
-          <th>{''}</th>
+        <tr><th>{''}</th>
           <th>{'4月'}</th>
           <th>{'5月'}</th>
           <th>{'6月'}</th>
@@ -83,12 +88,11 @@ const App: FunctionComponent<Props> = (props) => {
           <th>{'1月'}</th>
           <th>{'2月'}</th>
           <th>{'3月'}</th>
-        </tr>
-      </thead>
+        </tr></thead>
       <tbody>
         {cells.map((cell, i) => (
           <tr key={i}>
-            <th><td>{titles[i]}</td></th>
+            <td>{titles[i]}</td>
             <td>
               <input style={{ width: 45, height: 20 }} onChange={onChangeCell(i, 'april')} value={cell.april} />
             </td>
@@ -105,7 +109,7 @@ const App: FunctionComponent<Props> = (props) => {
               <input style={{ width: 45, height: 20 }} onChange={onChangeCell(i, 'august')} value={cell.august} />
             </td>
             <td>
-              <input style={{ width: 45, height: 20 }}onChange={onChangeCell(i, 'september')} value={cell.september} />
+              <input style={{ width: 45, height: 20 }} onChange={onChangeCell(i, 'september')} value={cell.september} />
             </td>
             <td>
               <input style={{ width: 45, height: 20 }} onChange={onChangeCell(i, 'october')} value={cell.october} />
