@@ -1,14 +1,13 @@
-import React, { ChangeEvent, FunctionComponent, useState } from 'react'
+import React, { FunctionComponent, useState } from 'react'
 import GetApi from './GetApi';
 import SetApi from './SetApi';
 
 interface Props {
   changeApi: VoidFunction;
+  nowNum: number;
 }
 
 const Settings: FunctionComponent<Props> = (props) => {
-
-  const titles = ['氏名', '年休総数', '年末目標残数', '現時点残数'];
 
   const cellWidth = 100;
   const cellHeight = 20;
@@ -23,7 +22,6 @@ const Settings: FunctionComponent<Props> = (props) => {
   const [nameVal, setNameVal] = useState(GetApi("name", "dummy"));
   const [totalVal, setTotalVal] = useState(GetApi("totalholiday", "dummy"));
   const [lastVal, setLastVal] = useState(GetApi("targetholiday", "dummy"));
-  const [nowVal, setNowVal] = useState(GetApi("remain", "dummy"));
 
   const handleInputNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length <= textLengthCheck) {
@@ -42,7 +40,6 @@ const Settings: FunctionComponent<Props> = (props) => {
       if (checkResult === true) {
         setTotalVal(e.target.value);
         SetApi("totalholiday", "dummy", e.target.value);
-        setNowVal(GetApi("remain", "dummy"));
 
         //変更関数を呼ぶ
         props.changeApi();
@@ -123,7 +120,7 @@ const Settings: FunctionComponent<Props> = (props) => {
           <td>
             <input
               style={{ width: cellWidth, height: cellHeight, border:"none" }}
-              value={nowVal}
+              value={props.nowNum}
             />
           </td>
         </tr>

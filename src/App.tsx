@@ -33,6 +33,7 @@ function App() {
   const [maximum, setMaximum] = useState(maxYaxis());
   const [plNum, setPlNum] = useState(GetApi("totalplan", "dummy"));
   const [suNum, setSuNum] = useState(GetApi("totalsudden", "dummy"));
+  const [nowNum, setNowNum] = useState(GetApi("remain", "dummy"));
 
   /** チャート関連データの更新メソッド props格納 */
   const changeApi = () => {
@@ -42,6 +43,7 @@ function App() {
     setMaximum(maxYaxis());
     setPlNum(GetApi("totalplan", "dummy"));
     setSuNum(GetApi("totalsudden", "dummy"));
+    setNowNum(GetApi("remain", "dummy"));
   }
 
   return (
@@ -50,7 +52,7 @@ function App() {
         <h1 className="ui header" style={{ marginTop: 10, marginLeft: 30 }}>有給休暇計画</h1>
       </div>
       <div style={{ marginTop: '10px', marginLeft: 30, }}>
-        <Settings changeApi={changeApi} />
+        <Settings changeApi={changeApi} nowNum={nowNum}/>
         <Table changeApi={changeApi} />
       </div>
       {/* divで領域を調整し、左右にグラフを表示する*/}
