@@ -5,9 +5,7 @@ import GetApi from './GetApi';
 
 const TextBox = () => {
 
-    let comment = GetApi("comment", "dummy");
-
-    const [textVal, setTextVal] = useState(comment);
+    const [textVal, setTextVal] = useState(GetApi("comment", "dummy"));
 
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         if (e.target.value.length <= 300) {
