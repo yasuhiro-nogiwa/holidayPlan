@@ -2,7 +2,11 @@ import React, { ChangeEvent, FunctionComponent, useState } from 'react'
 import GetApi from './GetApi';
 import SetApi from './SetApi';
 
-const Settings: FunctionComponent = () => {
+interface Props {
+changeApi: VoidFunction;
+}
+
+const Settings: FunctionComponent<Props> = ( props ) => {
 
   const titles = ['氏名', '年休総数', '年末目標残数', '現時点残数'];
 
@@ -32,6 +36,9 @@ const Settings: FunctionComponent = () => {
           setTotalVal(e.target.value);
           SetApi("totalholiday","dummy",e.target.value);
           setNowVal(GetApi("remain", "dummy"));
+
+          //変更関数を呼ぶ
+          props.changeApi();
         }
      }
     }

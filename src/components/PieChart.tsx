@@ -1,46 +1,29 @@
+import React from 'react';
 import { Pie } from 'react-chartjs-2';
 
-import GetApi from './GetApi';
+type Props = {
+    plan: number;
+    sudden: number;
+}
 
-const PieChart = () => {
-
-    //計画総数
-    let planNumber = function() {
-        return GetApi("totalplan", "dummy");
-    };
-    //突発総数
-    let suddenNumber = function() {
-        return GetApi("totalsudden", "dummy");
-    };
+const PieChart: React.FC<Props> = props => {
 
     const data = {
         "labels": ["計画", "突発"],
         "datasets": [{
             "label": "計画突発比率",
-            // 値をそのまま入れていい
-            "data": [planNumber(), suddenNumber()],
+            "data": [props.plan, props.sudden],
             "backgroundColor": ["rgb(255, 99, 132)",
                 "rgb(54, 162, 235)"]
         }]
     }
-
-    //小さく表示したい場合のオプション
-    // const options = {
-    //     scales: {
-    //         yAxes: [{
-    //             ticks: {
-    //                 beginAtZero: true
-    //             }
-    //         }]
-    //     }
-    // }
 
     return (
         <Pie
             data={data}
             width={50}
             height={30}
-            options={{ maintainAspectRatio: false }}
+            options={{ maintainAspectRatio: false }}    //アスペクト比の維持
         />
     );
 };

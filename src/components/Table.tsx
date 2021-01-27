@@ -2,7 +2,11 @@ import React, { ChangeEvent, FunctionComponent, useState } from 'react'
 import GetApi from './GetApi';
 import SetApi from './SetApi';
 
-const App: FunctionComponent = () => {
+interface Props {
+  changeApi: VoidFunction;
+}
+
+const App: FunctionComponent<Props> = (props) => {
 
   const titles = ['取得予定', '計画休数', '突発休数'];
   const titlesID = ['schedule', 'plan', 'sudden'];
@@ -40,6 +44,9 @@ const App: FunctionComponent = () => {
       setCells(_cells)
 
       SetApi(titlesID[index], key, event.target.value)
+
+        props.changeApi();
+
       }
 
       

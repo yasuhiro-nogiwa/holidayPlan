@@ -1,56 +1,21 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
-import GetApi from './GetApi';
 
-const Chart = () => {
+type Prop = {
+  schedule: number[]; //予定線
+  execute: number[];  //実行線
+  holiday: number[];  //休暇総数
+  maximum: number;    //Y軸Max値
+}
 
-  const monthArray = [
-    "april",
-    "may",
-    "june",
-    "july",
-    "august",
-    "september",
-    "october",
-    "november",
-    "december",
-    "january",
-    "february",
-    "march",
-  ]
+const Chart: React.FC<Prop> = ( props ) => {
 
+  /** ラベルデータ */
   const labelData = [
     ['4月'], ['5月'], ['6月'], ['7月'],
     ['8月'], ['9月'], ['10月'], ['11月'],
     ['12月'], ['1月'], ['2月'], ['3月'],
   ]
-
-  function getGraphData( typeKey: string) {
-    let retData: Array<number>=[];
-    for (const key in monthArray) {
-
-      let val = GetApi(typeKey, monthArray[key])
-      console.log(val);
-      if (!val || val < 0) {
-        val = 0;
-      }
-      retData.push(val);
-    }
-    return retData;
-  }
-
-  //予定線データ
-  let planDataF = function () {
-    return getGraphData("getmonthlyschedule");
-  }
-  //実行線データ
-  let executionDataF = function () {
-    return getGraphData("getmonthlyexecute");
-  }
-  //総数棒グラフデータ
-  let totalBarDataF = function () {
-    return getGraphData("monthlyholiday");
-  }
 
   /** グラフデータ */
   const graphData = {
@@ -59,7 +24,7 @@ const Chart = () => {
       {
         type: 'line',   //グラフ種類
         yAxisID: 'y-axis-days',
-        data: planDataF(),    //データ
+        data: props.schedule,    //データ
         label: '予定',  //凡例のlabel
         lineTension: 0, //線は直線で表示する
         fill: false,    //塗りつぶしなし
@@ -69,7 +34,7 @@ const Chart = () => {
       {
         type: 'line',
         yAxisID: 'y-axis-days',
-        data: executionDataF(),
+        data: props.execute,
         label: '実行',
         lineTension: 0,
         fill: false,
@@ -79,7 +44,7 @@ const Chart = () => {
       {
         type: 'bar',
         yAxisID: 'y-axis-days',
-        data: totalBarDataF(),
+        data: props.holiday,
         backgroundColor: 'rgba(30, 144, 255, 1)',
         label: '消化総数',
       },
@@ -88,16 +53,11 @@ const Chart = () => {
         yAxisID: 'y-axis-days',
         data: [10, 10, 10, 10, 10, 10, 10, 9, 8, 7, 6, 5],
         label: 'デットゾーン',
-        // lineTension: 0,
         pointRadius: 0,
         borderColor: 'rgba(255, 0, 0, 0)',
         backgroundColor: 'rgba(255, 0, 0, 0.5)',
       },],
   };
-
-  function maxYaxis(): number {
-    return (planDataF()[0] + 5);
-  }
 
   /** グラフオプション */
   const graphOption = {
@@ -106,7 +66,6 @@ const Chart = () => {
         {
           scaleLabel: {
             display: true,
-            // labelString: '2019年',
           },
         },
       ],
@@ -119,8 +78,7 @@ const Chart = () => {
           },
           ticks: {
             beginAtZero: true,
-            max: maxYaxis()
-            // callback: maxYaxis,
+            max: props.maximum
           },
         },
       ],
