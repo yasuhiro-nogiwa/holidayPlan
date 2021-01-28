@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react'
+import React, { useState } from 'react'
 import GetApi from './GetApi';
 import SetApi from './SetApi';
 
@@ -7,30 +7,28 @@ interface Props {
   nowNum: number;
 }
 
-const Settings: FunctionComponent<Props> = (props) => {
+const Settings: React.FC<Props> = (props) => {
 
   const cellWidth = 100;
   const cellHeight = 20;
-  const textLengthCheck = 300;
-  const totalholidaymin = 0;
-  const targetholidaymin = 5;
-  const targetholidaymax = 35;
   const tablewidth = 250;
 
-  const numcheck = /^[0-9\b]+$/;
+  const numcheck = /^[0-9\b\.]+$/;
 
   const [nameVal, setNameVal] = useState(GetApi("name", "dummy"));
   const [totalVal, setTotalVal] = useState(GetApi("totalholiday", "dummy"));
   const [lastVal, setLastVal] = useState(GetApi("targetholiday", "dummy"));
 
+  // 氏名の判定
   const handleInputNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length <= textLengthCheck) {
+    if (e.target.value.length <= 300) {
       e.preventDefault();
       setNameVal(e.target.value);
       SetApi("name", "dummy", e.target.value);
     }
   }
 
+  // 今年度年末総数の判定
   const handleInputTotalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
 
@@ -47,16 +45,20 @@ const Settings: FunctionComponent<Props> = (props) => {
     }
   }
 
+  // 年末目標残数の判定
   const handleInputLastChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     if (e.target.value === '' || numcheck.test(e.target.value)) {
       let checkResult = dayCheck(e.target.value, "targetholiday");
 
-      setLastVal(e.target.value);
+      var txtArrray = e.target.value.split(".");
+      if (!txtArrray[1] || txtArrray[1] === '0' || txtArrray[1] === '5') {
+        setLastVal(e.target.value);
+      }
 
       if (e.target.value === '') {
-        checkResult = true;
+        checkResult = false;
       }
 
       if (checkResult === true) {
@@ -65,20 +67,40 @@ const Settings: FunctionComponent<Props> = (props) => {
     }
   }
 
+  // 入力された数値が期待範囲内か判別
   function dayCheck(inputTxt: string, label: string): boolean {
 
     let result: boolean = false;
     let inputNum = Number(inputTxt);
 
-    if (label === 'totalholiday') {
-      if (inputNum >= totalholidaymin) {
-        result = true;
+    // 入力時の小数が5か判別
+    var txtArrray = inputTxt.split(".");
+    if (!txtArrray[1]) {
+
+      if (label === 'totalholiday') {
+        if (inputNum >= 0 && inputNum <= 40) {
+          result = true;
+        }
+
+      } else {
+
+        if (inputNum >= 5 && inputNum <= 35) {
+          result = true;
+        }
       }
-
     } else {
+      if (txtArrray[1] === '0' || txtArrray[1] === '5') {
+        if (label === 'totalholiday') {
+          if (inputNum >= 0 && inputNum <= 40) {
+            result = true;
+          }
 
-      if (inputNum >= targetholidaymin && inputNum <= targetholidaymax) {
-        result = true;
+        } else {
+
+          if (inputNum >= 5 && inputNum <= 35) {
+            result = true;
+          }
+        }
       }
     }
     return result;
@@ -92,7 +114,7 @@ const Settings: FunctionComponent<Props> = (props) => {
           <td>氏名</td>
           <td>
             <input
-              style={{ width: cellWidth, height: cellHeight, border:"none" }}
+              style={{ width: cellWidth, height: cellHeight, border: "none" }}
               value={nameVal}
               onChange={handleInputNameChange} />
           </td>
@@ -101,7 +123,7 @@ const Settings: FunctionComponent<Props> = (props) => {
           <td>今年度総数</td>
           <td>
             <input
-              style={{ width: cellWidth, height: cellHeight, border:"none" }}
+              style={{ width: cellWidth, height: cellHeight, border: "none" }}
               value={totalVal}
               onChange={handleInputTotalChange} />
           </td>
@@ -110,7 +132,7 @@ const Settings: FunctionComponent<Props> = (props) => {
           <td>年末目標残数</td>
           <td>
             <input
-              style={{ width: cellWidth, height: cellHeight, border:"none" }}
+              style={{ width: cellWidth, height: cellHeight, border: "none" }}
               value={lastVal}
               onChange={handleInputLastChange} />
           </td>
@@ -119,7 +141,7 @@ const Settings: FunctionComponent<Props> = (props) => {
           <td>現時点残数</td>
           <td>
             <input
-              style={{ width: cellWidth, height: cellHeight, border:"none" }}
+              style={{ width: cellWidth, height: cellHeight, border: "none" }}
               value={props.nowNum}
             />
           </td>

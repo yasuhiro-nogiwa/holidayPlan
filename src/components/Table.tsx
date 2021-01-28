@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FunctionComponent, useState } from 'react'
+import React, { useState } from 'react'
 import GetApi from './GetApi';
 import SetApi from './SetApi';
 
@@ -6,15 +6,15 @@ interface Props {
   changeApi: VoidFunction;
 }
 
-const App: FunctionComponent<Props> = (props) => {
+const Table: React.FC<Props> = (props) => {
 
   const titles = ['取得予定', '計画休数', '突発休数'];
   const titlesID = ['schedule', 'plan', 'sudden'];
-  
+
   const cellWidth = 45;
   const cellHeight = 20;
 
-  const numcheck = /^[0-9\b]+$/;
+  const numcheck = /^[0-9\b\.]+$/;
 
   const [cells, setCells] = useState([
     {
@@ -39,7 +39,7 @@ const App: FunctionComponent<Props> = (props) => {
 
   // 入力時の処理
   const onChangeCell = (index: number, key: string) => (
-    event: ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     if (event.target.value === '' || numcheck.test(event.target.value)) {
       let checkResult = dayCheck(event.target.value);
@@ -56,13 +56,24 @@ const App: FunctionComponent<Props> = (props) => {
     }
   }
 
+  // 入力された数値が期待範囲内か判別
   function dayCheck(inputTxt: string): boolean {
 
     let result: boolean = false;
     let inputNum = Number(inputTxt);
 
-    if (inputNum >= 0 && inputNum <= 31) {
-      result = true;
+    // 入力時の小数が5か判別
+    var txtArrray = inputTxt.split(".");
+    if (!txtArrray[1]) {
+      if (inputNum >= 0 && inputNum <= 31) {
+        result = true;
+      }
+    } else {
+      if (txtArrray[1] === '0' || txtArrray[1] === '5') {
+        if (inputNum >= 0 && inputNum <= 31) {
+          result = true;
+        }
+      }
     }
     return result;
   }
@@ -90,40 +101,136 @@ const App: FunctionComponent<Props> = (props) => {
           <tr key={i}>
             <td>{titles[i]}</td>
             <td>
-              <input style={{ width: cellWidth, height: cellHeight,border:"none", textAlign: "center" }} onChange={onChangeCell(i, 'april')} value={cell.april} />
+              <input
+                style={{
+                  width: cellWidth,
+                  height: cellHeight,
+                  border: "none",
+                  textAlign: "center"
+                }}
+                onChange={onChangeCell(i, 'april')}
+                value={cell.april} />
             </td>
             <td>
-              <input style={{ width: cellWidth, height: cellHeight,border:"none", textAlign: "center" }} onChange={onChangeCell(i, 'may')} value={cell.may} />
+              <input
+                style={{
+                  width: cellWidth,
+                  height: cellHeight,
+                  border: "none",
+                  textAlign: "center"
+                }}
+                onChange={onChangeCell(i, 'may')}
+                value={cell.may} />
             </td>
             <td>
-              <input style={{ width: cellWidth, height: cellHeight,border:"none", textAlign: "center" }} onChange={onChangeCell(i, 'june')} value={cell.june} />
+              <input
+                style={{
+                  width: cellWidth,
+                  height: cellHeight,
+                  border: "none",
+                  textAlign: "center"
+                }}
+                onChange={onChangeCell(i, 'june')}
+                value={cell.june} />
             </td>
             <td>
-              <input style={{ width: cellWidth, height: cellHeight,border:"none", textAlign: "center" }} onChange={onChangeCell(i, 'july')} value={cell.july} />
+              <input
+                style={{
+                  width: cellWidth,
+                  height: cellHeight,
+                  border: "none",
+                  textAlign: "center"
+                }}
+                onChange={onChangeCell(i, 'july')}
+                value={cell.july} />
             </td>
             <td>
-              <input style={{ width: cellWidth, height: cellHeight,border:"none", textAlign: "center" }} onChange={onChangeCell(i, 'august')} value={cell.august} />
+              <input
+                style={{
+                  width: cellWidth,
+                  height: cellHeight,
+                  border: "none",
+                  textAlign: "center"
+                }}
+                onChange={onChangeCell(i, 'august')}
+                value={cell.august} />
             </td>
             <td>
-              <input style={{ width: cellWidth, height: cellHeight,border:"none", textAlign: "center" }} onChange={onChangeCell(i, 'september')} value={cell.september} />
+              <input
+                style={{
+                  width: cellWidth,
+                  height: cellHeight,
+                  border: "none",
+                  textAlign: "center"
+                }}
+                onChange={onChangeCell(i, 'september')}
+                value={cell.september} />
             </td>
             <td>
-              <input style={{ width: cellWidth, height: cellHeight,border:"none", textAlign: "center" }} onChange={onChangeCell(i, 'october')} value={cell.october} />
+              <input
+                style={{
+                  width: cellWidth,
+                  height: cellHeight,
+                  border: "none",
+                  textAlign: "center"
+                }}
+                onChange={onChangeCell(i, 'october')}
+                value={cell.october} />
             </td>
             <td>
-              <input style={{ width: cellWidth, height: cellHeight,border:"none", textAlign: "center" }} onChange={onChangeCell(i, 'november')} value={cell.november} />
+              <input
+                style={{
+                  width: cellWidth,
+                  height: cellHeight,
+                  border: "none",
+                  textAlign: "center"
+                }}
+                onChange={onChangeCell(i, 'november')}
+                value={cell.november} />
             </td>
             <td>
-              <input style={{ width: cellWidth, height: cellHeight,border:"none", textAlign: "center" }} onChange={onChangeCell(i, 'december')} value={cell.december} />
+              <input
+                style={{
+                  width: cellWidth,
+                  height: cellHeight,
+                  border: "none",
+                  textAlign: "center"
+                }}
+                onChange={onChangeCell(i, 'december')}
+                value={cell.december} />
             </td>
             <td>
-              <input style={{ width: cellWidth, height: cellHeight,border:"none", textAlign: "center" }} onChange={onChangeCell(i, 'january')} value={cell.january} />
+              <input
+                style={{
+                  width: cellWidth,
+                  height: cellHeight,
+                  border: "none",
+                  textAlign: "center"
+                }}
+                onChange={onChangeCell(i, 'january')}
+                value={cell.january} />
             </td>
             <td>
-              <input style={{ width: cellWidth, height: cellHeight,border:"none", textAlign: "center" }} onChange={onChangeCell(i, 'february')} value={cell.february} />
+              <input
+                style={{
+                  width: cellWidth,
+                  height: cellHeight,
+                  border: "none",
+                  textAlign: "center"
+                }}
+                onChange={onChangeCell(i, 'february')}
+                value={cell.february} />
             </td>
             <td>
-              <input style={{ width: cellWidth, height: cellHeight,border:"none", textAlign: "center" }} onChange={onChangeCell(i, 'march')} value={cell.march} />
+              <input
+                style={{
+                  width: cellWidth,
+                  height: cellHeight,
+                  border: "none",
+                  textAlign: "center"
+                }}
+                onChange={onChangeCell(i, 'march')}
+                value={cell.march} />
             </td>
           </tr>
         ))}
@@ -132,4 +239,4 @@ const App: FunctionComponent<Props> = (props) => {
   )
 }
 
-export default App
+export default Table
